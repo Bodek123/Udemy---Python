@@ -18,8 +18,17 @@ locations = {0: "You are sitting in front of a computer learning Python",
 
 
 #exits must be in a dictionary, not in a lists
+exits = {0: {"Q": 0},
+         1: {"W": 2, "E": 3, "N": 5, "S": 4, "Q": 0},
+         2: {"N": 5, "Q": 0},
+         3: {"W": 1, "Q": 0},
+         4: {"N": 1, "W": 2, "Q": 0},
+         5: {"W": 2, "S": 1, "Q": 0} }
+         
 
-#
+
+
+## Exits in lists
 #exits = [{"Q": 0},
 #         {"W": 2, "E": 3, "N": 5, "S": 4, "Q": 0},
 #         {"N": 5, "Q": 0},
@@ -27,17 +36,6 @@ locations = {0: "You are sitting in front of a computer learning Python",
 #         {"N": 1, "W": 2, "Q": 0},
 #         {"W": 2, "S": 1, "Q": 0}]
 
-
-exits = {0: "Q",
-          1: ["W", "N", "S"]
-          2: "W",
-          3: "E",
-          4: "S",
-          5: "N"}
-
-#exits =  {0: "Q
-
-print(exits[1].keys())
 
 
 loc = 1
