@@ -1,12 +1,11 @@
-# Modify the program so that the exits is a dictionary rather than a list,
-# with the keys being the numbers of the locations and the values being
-# dictionaries holding the exits (as they do at present). No change should
-# be needed to the actual code.
-#
-# Once that is working, create another dictionary that contains words that
-# players may use. These words will be the keys, and their values will be
-# a single letter that the program can use to determine which way to go.
-
+# Challenge time!
+# We have mentioned that the data for the Adventure game could be organised in many
+# different ways.  We've created another way for you.
+# Your mission, if you choose to accept it, is to
+# change the code to make it work.
+# Below is the the complete program from the last video, but with the
+# locations dictionary modified so that everything is in a single dictionary.
+# N.B. Yes the code has some errors, thats what you need to fix!
 
 
 locations = {0: "You are sitting in front of a computer learning Python",
@@ -27,55 +26,51 @@ exits = {0: {"Q": 0},
          
 
 
-
-## Exits in lists
-#exits = [{"Q": 0},
-#         {"W": 2, "E": 3, "N": 5, "S": 4, "Q": 0},
-#         {"N": 5, "Q": 0},
-#         {"W": 1, "Q": 0},
-#         {"N": 1, "W": 2, "Q": 0},
-#         {"W": 2, "S": 1, "Q": 0}]
+namedExits = {1: {"2": 2, "3": 3, "5": 5, "4": 4},
+              2: {"5": 5},
+              3: {"1": 1},
+              4: {"1": 1, "2": 2},
+              5: {"2": 2, "1": 1}}
 
 vocabulary = {"QUIT" : "Q",
               "NORTH" : "N",
               "SOUTH" : "S",
               "EAST" : "E",
-              "WEST" : "W"}
+              "WEST" : "W",
+              "ROAD" : "1",
+              "HILL": "2",
+              "BUILDING": "3",
+              "VALLEY": "4",
+              "FOREST": "5"}
 
-#print(locations[0])
-#print(locations[0].split())
-#print(locations[3].split(","))
-#print(' '.join(locations[0].split())) 
 
 loc = 1
 
 while True:
 
-    availableExites =", ".join(exits[loc].keys())
+    availableExites =", ".join(exits[loc].keys()) # dodanie przecinkow do wartosci dostepnych wyjsc
  
-    print(locations[loc])
     
     if loc == 0:
         break
+    else:
+        allExits = exits[loc].copy() 
+        allExits.update(namedExits[loc])
         
     direction = input ("Dostepne wyjscia to: " + availableExites + " ").upper()
     print()
     
     #Usage of vocabulary dictionary in input
-    if len(direction) > 1:
-#        print ("You choosed: " + vocabulary[direction])
-#        for word in vocabulary:         
-#            if word in direction:
-#                direction = vocabulary[word]
-        
+    if len(direction) > 1:        
         words = direction.split() #Znajduje kierunek w zdaniu
         for word in words:
             if word in vocabulary:
                 direction = vocabulary[word]
                 break
+        
     
-    if direction in exits[loc]:
-        loc = exits[loc][direction]
+    if direction in allExits:
+        loc = allExits[direction]
     else:
         print("Nie pojdziesz ")
 
